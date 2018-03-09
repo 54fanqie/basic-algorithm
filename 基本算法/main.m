@@ -7,6 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
 //冒泡排序
 void qipao(int a[],int num){
     for (int i=0; i< num-1; i++) {
@@ -201,6 +205,66 @@ NSInteger searchStringInSuperString(NSString * subStr,NSString * supStr){
     return result;
 }
 
+//链表逆序
+typedef struct NODE {
+    struct NODE *next;
+    int num;
+}node;
+//创建一个链表
+node *createLinkList(int length) {
+    
+    if (length <=0) {
+        return NULL;
+    }
+    node *head,*p,*q;
+    int number =1;
+    head = (node *)malloc(sizeof(node));
+    head->num =1;
+    head->next = head;
+    p = q = head;
+
+    while (++number <= length) {
+
+        p = (node *)malloc(sizeof(node));
+        p->num = number;
+        p->next =NULL;
+        q->next = p;
+        q = p;
+    }
+    return head;
+}
+//逆序
+node* reverseFunc(node *head){
+    
+    if (head == NULL || head->next == NULL)//链表为空或者仅1个数直接返回
+    return head;
+    
+    node* p = head, *newH = NULL;
+    while (p != NULL)                 //一直迭代到链尾
+    {
+        node* tmp = p->next;          //暂存p下一个地址，防止变化指针指向后找不到后续的数
+        p->next = newH;               //p->next指向前一个空间
+        newH = p;                     //新链表的头移动到p，扩长一步链表
+        p = tmp;                   //p指向原始链表p指向的下一个空间
+    }
+    return newH;
+}
+//打印链表
+void printLinkList(node *head) {
+    
+    if (head ==NULL) {
+        return;
+    }
+    
+    node *p = head;
+    while (p) {
+    
+        printf("%d ", p->num);
+        p = p -> next;
+    }
+    printf("\n");
+}
+
 
  //打印结果
 void printResult (int arra[],int num,NSString * title){
@@ -250,14 +314,22 @@ int main(int argc, const char * argv[]) {
         //实现hello world  输出结果为world hello
         char *p ="helloword";
         char p1 = spliterFunc(p);
-//        NSLog(@"%s",p1);
+        NSLog(@"%c",p1);
 
         //在父字符串中查找子字符串的算法
         NSString *  supStr = @"123456789qwertyuiopasdfghjklzxcvbnm";
         NSString *  subStr  = @"qwer";
         NSLog(@"%ld",searchStringInSuperString(subStr,supStr));
         
-
+        //初始化链表
+        node * no = createLinkList(10);
+        if (no) {
+            printLinkList(no);
+            node * reverseno = reverseFunc(no);
+            printLinkList(reverseno);
+            free(reverseno);
+        }
+        free(no);
     }
     return 0;
 }
