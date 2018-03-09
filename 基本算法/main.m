@@ -94,9 +94,9 @@ int searchWithoutRecursion2(int arr[],int star,int end,int targat){
     int mid,right,left;
     right =end;
     left = star;
-   
+    
     while (left <= right) {
-         mid = (left + right)/2;
+        mid = (left + right)/2;
         if (targat== arr[mid]) {
             return arr[mid];
         }else  if (targat < arr[mid]) {
@@ -163,20 +163,20 @@ NSString*  spliterFunc(char *p) {
         p++;
         printf("%s\n",p);
     }
-//    char a[2];
-   NSString * string;
+    //    char a[2];
+    NSString * string;
     for (int k = i; k >= 0; k--) {
-       printf("输出：%s\n", c[k]);
+        printf("输出：%s\n", c[k]);
         if (k > 0) {
             printf(" ");
-         
+            
         } else {
-
+            
             printf("\n");
         }
         
     }
-//    string = [NSString stringWithUTF8String:c[k]];
+    //    string = [NSString stringWithUTF8String:c[k]];
     NSLog(@"%@",string);
     return string;
 }
@@ -185,6 +185,7 @@ NSInteger searchStringInSuperString(NSString * subStr,NSString * supStr){
     NSInteger supCount = supStr.length;
     NSInteger subCount  = subStr.length;
     NSInteger i = 0,j = 0,result = -1;
+    //方法一
     //j为父字符串索引
     while (j < supCount && i < subCount) {
         if ([subStr characterAtIndex:i] == [supStr characterAtIndex:j]) {
@@ -196,12 +197,28 @@ NSInteger searchStringInSuperString(NSString * subStr,NSString * supStr){
         }
         if (i == subCount) {
             NSLog(@"相同字符串位置%ld",(long)(j - i));
-             result =  (long)(j - i);
+            result =  (long)(j - i);
         }else{
             NSLog(@"不相同字串");
-           result = -1;
+            result = -1;
         }
     }
+    //方法二
+    //对其法则，如果def在一到abcdef最后一位还是没有相同那就是没有相同子串
+    
+    for (int i = 0; i <= supCount - subCount; i++) {//如果
+        int j;
+        for (j = 0; j < subCount; j++) {
+            //拿出子串的第一个
+            if ([subStr characterAtIndex:j] != [supStr characterAtIndex:j + i]) {
+                break;
+            }
+        }
+        if (j == subCount) {
+            result = i;
+        }
+    }
+    
     return result;
 }
 
@@ -222,9 +239,9 @@ node *createLinkList(int length) {
     head->num =1;
     head->next = head;
     p = q = head;
-
+    
     while (++number <= length) {
-
+        
         p = (node *)malloc(sizeof(node));
         p->num = number;
         p->next =NULL;
@@ -237,7 +254,7 @@ node *createLinkList(int length) {
 node* reverseFunc(node *head){
     
     if (head == NULL || head->next == NULL)//链表为空或者仅1个数直接返回
-    return head;
+        return head;
     
     node* p = head, *newH = NULL;
     while (p != NULL)                 //一直迭代到链尾
@@ -258,7 +275,7 @@ void printLinkList(node *head) {
     
     node *p = head;
     while (p) {
-    
+        
         printf("%d ", p->num);
         p = p -> next;
     }
@@ -266,7 +283,7 @@ void printLinkList(node *head) {
 }
 
 
- //打印结果
+//打印结果
 void printResult (int arra[],int num,NSString * title){
     for (int i=0; i< num; i++) {
         NSLog(@"%@ : %d",title,arra[i]);
@@ -281,7 +298,7 @@ int main(int argc, const char * argv[]) {
         int num =sizeof(a)/sizeof(int);
         qipao(a,num);
         printResult(a,num,@"冒泡排序");
-    
+        
         
         //选择排序
         int b[8] = {33,55,22,11,10,78,4,67};
@@ -294,7 +311,7 @@ int main(int argc, const char * argv[]) {
         int num3 =sizeof(c)/sizeof(int);
         quickSort(c, 0,num3-1);
         printResult(c, num3, @"快速排序");
-  
+        
         //二分值查找
         int d[5] = {1,2,3,4,5};
         int  xixi =searchWithoutRecursion2(d,d[0],d[4],3);
@@ -315,7 +332,7 @@ int main(int argc, const char * argv[]) {
         char *p ="helloword";
         char p1 = spliterFunc(p);
         NSLog(@"%c",p1);
-
+        
         //在父字符串中查找子字符串的算法
         NSString *  supStr = @"123456789qwertyuiopasdfghjklzxcvbnm";
         NSString *  subStr  = @"qwer";
