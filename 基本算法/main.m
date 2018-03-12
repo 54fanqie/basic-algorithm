@@ -214,6 +214,7 @@ NSInteger searchStringInSuperString(NSString * subStr,NSString * supStr){
                 break;
             }
         }
+        NSLog(@"%d",i);
         if (j == subCount) {
             result = i;
         }
@@ -346,7 +347,16 @@ int main(int argc, const char * argv[]) {
             printLinkList(reverseno);
             free(reverseno);
         }
+        
+        //再次增加一个基础算法
+        NSLog(@"%@",no);
         free(no);
+        
+       
+        
+        
+        
+        
     }
     return 0;
 }
