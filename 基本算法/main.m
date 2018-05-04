@@ -10,6 +10,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//冒泡排序
+void qipao2(int a[],int num){
+    for (int i=0; i< num-1; i++) {
+        for (int j=0; j< num-1-i; j++) {
+            if (a[j]<a[j+1]) {
+                int tmp = a[j];
+                a[j]=a[j+1];
+                a[j+1] = tmp;
+            }
+        }
+    }
+}
 
 //冒泡排序
 void qipao(int a[],int num){
@@ -348,11 +360,11 @@ int main(int argc, const char * argv[]) {
             free(reverseno);
         }
         
-        //再次增加一个基础算法
-        NSLog(@"%@",no);
         free(no);
         
        
+        //        在 Xcode 9 以前，虽然 Xcode 是自带有代码版本控制的功能，但是此功能相对比较简单，容易出现commit failed 的情况。正常情况下我都是使用终端来管理版本的时候多一些。GitHub 本来就有 Mac 版本的客户端，但这次 Xcode 9 引入后，我觉得对于我们开发者来说就更加的方便了。因为比较简单，我就上几张图大家观赏一下吧！也可以下一个 Xcode 9 自己体验一下。
+        
         
         
         
